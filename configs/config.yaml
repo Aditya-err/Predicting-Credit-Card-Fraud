@@ -1,0 +1,77 @@
+# Kaggle Playground Series S6E11 - Predicting Credit Card Fraud
+# Project Configuration
+
+competition:
+  name: "playground-series-s6e11"
+  metric: "roc_auc"
+  target_col: "is_fraud"
+  id_col: "id"
+  random_seed: 42
+  n_splits: 5
+  n_jobs: 7
+
+paths:
+  train_path: "playground-series-s6e11/train.csv"
+  test_path: "playground-series-s6e11/test.csv"
+  sample_submission_path: "playground-series-s6e11/sample_submission.csv"
+  submissions_dir: "outputs/submissions"
+  oof_dir: "outputs/oof"
+  predictions_dir: "outputs/predictions"
+  experiment_log_path: "experiments/experiment_log.csv"
+  reports_dir: "reports"
+
+models:
+  EXP-001:
+    name: "LightGBM"
+    model_type: "lightgbm"
+    params:
+      n_estimators: 1500
+      learning_rate: 0.05
+      num_leaves: 31
+      max_depth: -1
+      min_child_samples: 20
+      subsample: 0.8
+      colsample_bytree: 0.8
+      random_state: 42
+      n_jobs: 7
+      verbose: -1
+    early_stopping_rounds: 100
+
+  EXP-002:
+    name: "CatBoost"
+    model_type: "catboost"
+    params:
+      iterations: 1500
+      learning_rate: 0.05
+      depth: 6
+      random_seed: 42
+      thread_count: 7
+      verbose: False
+      eval_metric: "AUC"
+    early_stopping_rounds: 100
+
+  EXP-003:
+    name: "XGBoost"
+    model_type: "xgboost"
+    params:
+      n_estimators: 1500
+      learning_rate: 0.05
+      max_depth: 6
+      tree_method: "hist"
+      subsample: 0.8
+      colsample_bytree: 0.8
+      random_state: 42
+      n_jobs: 7
+      eval_metric: "auc"
+    early_stopping_rounds: 100
+
+  EXP-004:
+    name: "Ridge_Logistic_Regression"
+    model_type: "logistic_regression"
+    params:
+      C: 1.0
+      penalty: "l2"
+      solver: "lbfgs"
+      max_iter: 1000
+      random_state: 42
+      n_jobs: 7

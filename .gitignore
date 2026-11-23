@@ -1,0 +1,30 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Large competition datasets (raw inputs)
+playground-series-s6e11/
+
+# Intermediate model predictions (>300 MB)
+outputs/oof/
+outputs/predictions/
+catboost_info/
+
+# Scratch & temporary logs
+scratch/
+*.log
+
+# OS generated
+.DS_Store
+Thumbs.db
