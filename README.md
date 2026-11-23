@@ -3,9 +3,9 @@
 An end-to-end, Grandmaster-tier competitive machine learning pipeline and rigorous statistical audit for **Kaggle Playground Series – Season 6 Episode 11 (Predicting Credit Card Fraud)**.
 
 [![Metric](https://img.shields.io/badge/Metric-ROC%20AUC-blue.svg)](https://www.kaggle.com/competitions/playground-series-s6e11)
-[![Final OOF AUC](https://img.shields.io/badge/Final%20OOF%20ROC%20AUC-0.94703-success.svg)](reports/FINAL_RESULTS.md)
+[![Public LB](https://img.shields.io/badge/Kaggle%20Public%20LB-0.94801-brightgreen.svg)](https://www.kaggle.com/competitions/playground-series-s6e11)
+[![Final OOF AUC](https://img.shields.io/badge/5--Fold%20CV%20OOF%20AUC-0.94703-success.svg)](reports/FINAL_RESULTS.md)
 [![Validation](https://img.shields.io/badge/Validation-Stratified%205--Fold%20CV-orange.svg)](reports/WINNING_STRATEGY.md)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ---
 

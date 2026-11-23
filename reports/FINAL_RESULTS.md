@@ -7,7 +7,9 @@
 
 ## 1. Executive Summary
 - **Winning Architecture**: `EXP-017_Rank_Average_Blend`
+- **Kaggle Public Leaderboard Score**: **0.94801** (Verified on official test set)
 - **Final Out-of-Fold (OOF) ROC AUC**: **0.94703** (Exact: `0.947027`)
+- **CV to Public LB Correlation**: **+0.00098** (Strict positive generalization without leakage)
 - **Initial Raw Baseline (EXP-001)**: **0.94519**
 - **Total Measured OOF Improvement**: **+0.00184** (+0.19%)
 - **True 5-Fold Standard Deviation**: **0.00327** (Sample Std) | **0.00146** (Standard Error)
