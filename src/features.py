@@ -166,6 +166,50 @@ def engineer_feature_pack_2(df: pd.DataFrame) -> pd.DataFrame:
     return X
 
 
+def engineer_feature_pack_3(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Constructs Feature Pack 3 (EXP-018+):
+    - All features from Feature Pack 2
+    - feat_velocity_recency_ratio: velocity_score / (hours_since_last_txn + 0.05)
+    - feat_exp_risk_flags: 2.0 ** feat_risk_flag_count (exponential cascade)
+    - feat_merchant_x_channel: merchant_category x channel interaction
+    - feat_device_x_channel: device_type x channel interaction
+    - feat_distance_x_velocity: distance_from_home_km * velocity_score
+    - feat_card_age_ratio: card_age_months / (customer_age * 12.0 + 1.0)
+    - feat_amount_per_distance: amount_usd / (distance_from_home_km + 1.0)
+    """
+    X = engineer_feature_pack_2(df)
+
+    # Velocity-to-recency surge ratio
+    X["feat_velocity_recency_ratio"] = (
+        X["velocity_score"].astype(np.float32) / (X["hours_since_last_txn"].astype(np.float32) + 0.05)
+    )
+
+    # Exponential risk flag cascade
+    X["feat_exp_risk_flags"] = (2.0 ** X["feat_risk_flag_count"].astype(np.float32)).astype(np.float32)
+
+    # High-signal categorical combinations
+    X["feat_merchant_x_channel"] = (
+        X["merchant_category"].astype(str) + "__" + X["channel"].astype(str)
+    )
+    X["feat_device_x_channel"] = (
+        X["device_type"].astype(str) + "__" + X["channel"].astype(str)
+    )
+
+    # Physical and behavioural interaction terms
+    X["feat_distance_x_velocity"] = (
+        X["distance_from_home_km"].astype(np.float32) * X["velocity_score"].astype(np.float32)
+    )
+    X["feat_card_age_ratio"] = (
+        X["card_age_months"].astype(np.float32) / (X["customer_age"].astype(np.float32) * 12.0 + 1.0)
+    )
+    X["feat_amount_per_distance"] = (
+        X["amount_usd"].astype(np.float32) / (X["distance_from_home_km"].astype(np.float32) + 1.0)
+    )
+
+    return X
+
+
 class InFoldTargetEncoder:
     """
     Strictly leakage-safe Out-of-Fold smoothed target encoder.
